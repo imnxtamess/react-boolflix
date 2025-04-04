@@ -3,9 +3,9 @@ import { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { movies, searchText, setSearchText, language, setLanguage } =
+  const { moviesPlusTv, searchText, setSearchText, language, setLanguage } =
     useMoviesContext();
-  console.log(movies);
+  console.log(moviesPlusTv);
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function Home() {
         </div>
 
         <div className="row">
-          {movies.map((movie) => (
+          {moviesPlusTv.map((movie) => (
             <div key={movie.id} className="col">
               <div className="card">
                 <h1>{movie.overview}</h1>
