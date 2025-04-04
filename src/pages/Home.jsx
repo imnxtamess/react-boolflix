@@ -1,3 +1,6 @@
+import { useMoviesContext } from "../contexts/GlobalContext";
 export default function Home() {
-  return <h1>Hello World</h1>;
+  const { movies, searchText, setSearchText } = useMoviesContext();
+  console.log(movies);
+  return <input type="text" onChange={(e) => setSearchText(e.target.value)} />;
 }
