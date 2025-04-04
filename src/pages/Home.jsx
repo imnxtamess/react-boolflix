@@ -1,6 +1,7 @@
 import { useMoviesContext } from "../contexts/GlobalContext";
 import { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
+import Header from "../components/Header";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const { moviesPlusTv, searchText, setSearchText, language, setLanguage } =
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <div className="container">
         <div className="d-flex mt-5 gap-3">
           <button onClick={() => setLanguage("it-IT")}>

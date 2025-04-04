@@ -1,1 +1,8 @@
 @import "bootstrap";
+
+:root {
+  --netflix-main: #e40914;
+  --netflix-main-dark: #141414;
+  --netflix-darker: #000000;
+  --netflix-dark-accent: #595959;
+}
