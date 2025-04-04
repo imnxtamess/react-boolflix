@@ -6,3 +6,11 @@
   --netflix-darker: #000000;
   --netflix-dark-accent: #595959;
 }
+
+header {
+  padding: 1rem;
+  background-color: var(--netflix-main-dark);
+  img {
+    width: 200px;
+  }
+}
