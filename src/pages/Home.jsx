@@ -50,7 +50,15 @@ export default function Home() {
                 <h1>{movie.overview}</h1>
                 <h1>{movie.title}</h1>
                 <h3>{movie.original_title}</h3>
-                <h5>{movie.original_language}</h5>
+                <h5>
+                  <ReactCountryFlag
+                    countryCode={"en" ? "gb" : movie.original_language}
+                    cdnUrl={`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/`}
+                    cdnSuffix="svg"
+                    title={movie.original_language}
+                    svg
+                  />
+                </h5>
                 <span>{movie.vote_average}</span>
               </div>
             </div>
