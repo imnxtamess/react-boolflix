@@ -12,6 +12,7 @@
 
 body {
   font-family: "Nunito", sans-serif;
+  background-color: var(--netflix-main-dark);
 }
 
 /*Utilities*/
@@ -89,7 +90,7 @@ header {
 /*#region Main */
 main {
   padding-top: 7rem;
-  background-color: var(--netflix-main-dark);
+
   min-height: calc(100vh);
   .movieCard {
     height: 500px;
@@ -131,6 +132,37 @@ main {
 }
 /*#endregion Main */
 
+footer {
+  .social-links {
+    a {
+      color: rgba(255, 255, 255, 0.815);
+    }
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    a {
+      text-decoration: none;
+      color: var(--netflix-dark-accent);
+      &:hover {
+        color: var(--netflix-light-accent);
+      }
+    }
+  }
+  .serviceCode {
+    padding: 0.3rem;
+    color: var(--netflix-dark-accent);
+    border: 1px solid var(--netflix-dark-accent);
+    &:hover {
+      color: var(--netflix-light-accent);
+      cursor: pointer;
+    }
+  }
+  span {
+    color: var(--netflix-dark-accent);
+  }
+}
 @keyframes transitionHoverCard {
   0% {
     opacity: 0;
