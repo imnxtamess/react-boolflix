@@ -98,6 +98,12 @@ main {
     .hoverCard {
       height: 500px;
       width: 342px;
+      @media only screen and (min-width: 1140px) {
+        width: 342px;
+      }
+      @media only screen and (min-width: 1400px) {
+        width: 306px;
+      }
       position: absolute;
       transform: translateX(-50%), translateY(-50%);
       border-radius: 10px;
@@ -109,8 +115,13 @@ main {
         animation: transitionHoverCard ease-in-out 0.5s;
         opacity: 1;
       }
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
     }
-    img {
+    .cardImg {
       box-shadow: 1px 1px 10px 10px var(--netflix-main-dark-darker);
       border-radius: 10px;
       height: 100%;

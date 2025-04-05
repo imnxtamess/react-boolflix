@@ -20,45 +20,56 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className="container">
-          <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3 text-center">
+        <div className="container-xl">
+          <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-md-2 row-cols-sm-1 g-4">
             {moviesPlusTv.map((movie) => (
-              <div key={movie.id} className="col">
+              <div key={movie.id} className="col d-flex justify-content-center">
                 <div className="movieCard">
                   <div className="hoverCard">
-                    <ul className="list-unstyled text-white mt-2 p-2">
+                    <ul className="list-unstyled text-white mt-2 p-2 text-start">
                       <li>
-                        <h3>
-                          <strong>Titolo:</strong>
+                        <p>
+                          <strong>Titolo:</strong>{" "}
                           {movie.title ? movie.title : movie.name}
-                        </h3>
+                        </p>
                       </li>
                       <li>
-                        <h3>
-                          <strong>Titolo originale:</strong>
+                        <p>
+                          <strong>Titolo originale:</strong>{" "}
                           {movie.original_title
                             ? movie.original_title
                             : movie.original_name}
-                        </h3>
+                        </p>
                       </li>
-                      <li>
-                        <span>{scoreToStars(movie.vote_average)}</span>
-                      </li>
-                      <li>{movie.overview}</li>
-                      <li>
-                        <h5>
+
+                      <li className="d-flex justify-content-between mr-5">
+                        <strong>
+                          Voto:
+                          <span>{scoreToStars(movie.vote_average)}</span>
+                        </strong>
+                        <div>
+                          <strong>Lingua:</strong>{" "}
                           <ReactCountryFlag
-                            countryCode={"en" ? "gb" : movie.original_language}
+                            countryCode={
+                              movie.original_language === "en"
+                                ? "gb"
+                                : movie.original_language
+                            }
                             cdnUrl={`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/`}
                             cdnSuffix="svg"
                             title={movie.original_language}
                             svg
                           />
-                        </h5>
+                        </div>
+                      </li>
+                      <li className="mt-2"></li>
+                      <li>
+                        <strong>Overview:</strong> {movie.overview}
                       </li>
                     </ul>
                   </div>
                   <img
+                    className="cardImg"
                     src={
                       movie.poster_path
                         ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
