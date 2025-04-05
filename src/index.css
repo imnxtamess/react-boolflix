@@ -47,8 +47,11 @@ header {
       .searchbar {
         border: 1px solid white;
         padding: 3px;
-        transition: width 10s;
+        img {
+          width: 24px;
+        }
         .searchbarinput {
+          margin-right: 3px;
           color: var(--netflix-light-accent);
           background-color: var(--netflix-main-dark);
           border: 0;
@@ -57,7 +60,9 @@ header {
           }
         }
       }
+
       .profile {
+        padding: 3px;
         position: relative;
         .caret {
           position: absolute;

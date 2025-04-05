@@ -2,6 +2,7 @@ import netflixLogo from "../assets/netflixLogo.svg";
 import searchIcon from "../assets/searchIcon.svg";
 import notificationBell from "../assets/notificationBell.svg";
 import caret from "../assets/caret.svg";
+import language from "../assets/language.svg";
 import ReactCountryFlag from "react-country-flag";
 import { useMoviesContext } from "../contexts/GlobalContext";
 import { NavLink } from "react-router-dom";
@@ -60,24 +61,26 @@ export default function Header() {
           </div>
 
           <div className="rightnav d-flex gap-4 px-5">
-            <span onClick={() => setLanguage("it-IT")}>
-              <ReactCountryFlag
-                cdnUrl={`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/`}
-                cdnSuffix="svg"
-                countryCode="it"
-                title="Italian"
-                svg
-              />
-            </span>
-            <span onClick={() => setLanguage("en-EN")}>
-              <ReactCountryFlag
-                cdnUrl={`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/`}
-                cdnSuffix="svg"
-                countryCode="gb"
-                title="English"
-                svg
-              />
-            </span>
+            <div className="language d-flex align-items-center gap-3">
+              <span onClick={() => setLanguage("it-IT")}>
+                <ReactCountryFlag
+                  cdnUrl={`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/`}
+                  cdnSuffix="svg"
+                  countryCode="it"
+                  title="Italian"
+                  svg
+                />
+              </span>
+              <span onClick={() => setLanguage("en-EN")}>
+                <ReactCountryFlag
+                  cdnUrl={`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/`}
+                  cdnSuffix="svg"
+                  countryCode="gb"
+                  title="English"
+                  svg
+                />
+              </span>
+            </div>
 
             {searchBar ? (
               <div className="d-flex searchbar ">
