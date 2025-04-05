@@ -24,6 +24,9 @@ body {
 
 /*#region Header */
 header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   background-image: linear-gradient(
     var(--netflix-main-dark-darker),
     var(--netflix-main-dark)
