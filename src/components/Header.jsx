@@ -20,7 +20,7 @@ export default function Header() {
   }
   return (
     <>
-      <header>
+      <header className="py-3">
         <nav className="d-flex align-items-center justify-content-between">
           <div className="leftnav d-flex gap-5 align-items-center">
             <div className="logo">

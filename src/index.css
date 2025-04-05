@@ -88,16 +88,43 @@ header {
 
 /*#region Main */
 main {
+  padding-top: 7rem;
   background-color: var(--netflix-main-dark);
-  min-height: 100vh;
+  min-height: calc(100vh);
+  .movieCard {
+    height: 500px;
+    width: 342px;
+    position: relative;
+    .hoverCard {
+      height: 500px;
+      width: 342px;
+      position: absolute;
+      transform: translateX(-50%), translateY(-50%);
+      border-radius: 10px;
+      background-color: var(--netflix-main-dark);
+      box-shadow: 1px 1px 10px 10px var(--netflix-main-dark-darker);
+      opacity: 0;
+      overflow-y: auto;
+      &:hover {
+        animation: transitionHoverCard ease-in-out 0.5s;
+        opacity: 1;
+      }
+    }
+    img {
+      box-shadow: 1px 1px 10px 10px var(--netflix-main-dark-darker);
+      border-radius: 10px;
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 /*#endregion Main */
 
-@keyframes transitionSearchBar {
+@keyframes transitionHoverCard {
   0% {
-    width: 0;
+    opacity: 0;
   }
   100% {
-    width: 1;
+    opacity: 1;
   }
 }
