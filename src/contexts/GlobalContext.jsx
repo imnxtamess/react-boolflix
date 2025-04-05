@@ -42,6 +42,40 @@ function useFetchTv(searchText, language) {
 
   return tv;
 }
+
+function useFetchPopMovies(language) {
+  const [popMovie, setPopMovie] = useState([]);
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=${language}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPopMovie(data.results);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }, [language]);
+  return popMovie;
+}
+
+function useFetchPopTv(language) {
+  const [popTv, setPopTv] = useState([]);
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=${language}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPopTv(data.results);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }, [language]);
+  return popTv;
+}
 // create the custom provider component
 function MoviesProvider({ children }) {
   const [searchText, setSearchText] = useState("");
@@ -50,9 +84,20 @@ function MoviesProvider({ children }) {
     ...useFetchMovies(searchText, language),
     ...useFetchTv(searchText, language),
   ];
+  const popMovies = useFetchPopMovies(language);
+
+  const popTv = useFetchPopTv(language);
   return (
     <MoviesContext.Provider
-      value={{ moviesPlusTv, searchText, setSearchText, language, setLanguage }}
+      value={{
+        moviesPlusTv,
+        popMovies,
+        popTv,
+        searchText,
+        setSearchText,
+        language,
+        setLanguage,
+      }}
     >
       {children}
     </MoviesContext.Provider>

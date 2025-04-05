@@ -1,5 +1,5 @@
 @import "bootstrap";
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
   --netflix-main: #e40914;
@@ -11,8 +11,9 @@
 }
 
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: var(--netflix-main-dark);
+  color: white;
 }
 
 /*Utilities*/
@@ -90,11 +91,13 @@ header {
 /*#region Main */
 main {
   padding-top: 7rem;
-
+  .categoryTitle {
+    color: white;
+  }
   min-height: calc(100vh);
   .movieCard {
-    height: 500px;
     width: 342px;
+    height: 500px;
     position: relative;
     .hoverCard {
       height: 500px;
@@ -107,7 +110,7 @@ main {
       }
       position: absolute;
       transform: translateX(-50%), translateY(-50%);
-      border-radius: 10px;
+      border-radius: 5px;
       background-color: var(--netflix-main-dark);
       box-shadow: 1px 1px 10px 10px var(--netflix-main-dark-darker);
       opacity: 0;
@@ -124,14 +127,23 @@ main {
     }
     .cardImg {
       box-shadow: 1px 1px 10px 10px var(--netflix-main-dark-darker);
-      border-radius: 10px;
+      border-radius: 5px;
       height: 100%;
       width: 100%;
+    }
+  }
+  .movieCard.popCard {
+    width: 185px;
+    height: 277.5px;
+    .hoverCard {
+      width: 185px;
+      height: 277.5px;
     }
   }
 }
 /*#endregion Main */
 
+/*#region Footer*/
 footer {
   .social-links {
     a {
@@ -163,6 +175,8 @@ footer {
     color: var(--netflix-dark-accent);
   }
 }
+
+/*#endregion Footer*/
 @keyframes transitionHoverCard {
   0% {
     opacity: 0;
