@@ -1,16 +1,95 @@
 @import "bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 :root {
   --netflix-main: #e40914;
   --netflix-main-dark: #141414;
-  --netflix-darker: #000000;
+  --netflix-main-dark-darker: #0b0b0b;
+  --netflix-black: #000000;
   --netflix-dark-accent: #595959;
+  --netflix-light-accent: #ababab;
 }
 
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+/*Utilities*/
+.active {
+  color: white;
+}
+.inactive {
+  color: var(--netflix-light-accent);
+}
+
+/*#region Header */
 header {
-  padding: 1rem;
+  background-image: linear-gradient(
+    var(--netflix-main-dark-darker),
+    var(--netflix-main-dark)
+  );
+  nav {
+    height: 50px;
+    .leftnav {
+      img {
+        width: 100px;
+        margin-left: 40px;
+      }
+      a {
+        text-decoration: none;
+        &:hover {
+          color: var(--netflix-dark-accent);
+        }
+      }
+    }
+
+    .rightnav {
+      .searchbar {
+        border: 1px solid white;
+        padding: 3px;
+        transition: width 10s;
+        .searchbarinput {
+          color: var(--netflix-light-accent);
+          background-color: var(--netflix-main-dark);
+          border: 0;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .profile {
+        position: relative;
+        .caret {
+          position: absolute;
+          transform: translateX(-50%), translateY(-50%);
+          top: 25%;
+        }
+      }
+
+      span {
+        padding: 0rem;
+        border: 0;
+        :hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+/*#endregion Header */
+
+/*#region Main */
+main {
   background-color: var(--netflix-main-dark);
-  img {
-    width: 200px;
+  min-height: 100vh;
+}
+/*#endregion Main */
+
+@keyframes transitionSearchBar {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 1;
   }
 }
