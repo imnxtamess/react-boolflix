@@ -2,29 +2,17 @@ import { useMoviesContext } from "../contexts/GlobalContext";
 import ReactCountryFlag from "react-country-flag";
 import { useEffect, useState } from "react";
 export default function Movies() {
-  const [dynamicId, setDynamicId] = useState("");
-  const [actorList, setActorList] = useState([]);
+  const [dynamicId, setDynamicId] = useState("950387");
   const {
     moviesAndShows,
     searchText,
     popMovies,
     scoreToStars,
-    useFetchMovieDetails,
+    getMovieActors,
   } = useMoviesContext();
 
-  const fetchedDetails = useFetchMovieDetails(dynamicId);
+  const actors = getMovieActors(dynamicId);
 
-  useEffect(() => {
-    if (dynamicId && fetchedDetails) {
-      const actors = fetchedDetails.map((element) => [element.name]);
-      actors.splice(5);
-
-      setActorList(actors);
-    }
-  }, [dynamicId, fetchedDetails]);
-
-  console.log(actorList);
-  console.log(fetchedDetails);
   return (
     <>
       <main>
@@ -44,8 +32,8 @@ export default function Movies() {
                       <strong>Title:</strong> <p>{movie.original_title}</p>
                       <strong>Overview:</strong> <p>{movie.overview}</p>
                       <strong>Actors:</strong>
-                      {actorList.map((actor) => (
-                        <p>{actor}</p>
+                      {actors.map((actor, index) => (
+                        <p key={index}>{actor}</p>
                       ))}
                     </div>
                   </div>

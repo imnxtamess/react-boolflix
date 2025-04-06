@@ -72,6 +72,19 @@ function useFetchMovieDetails(id) {
   return movieCast;
 }
 
+function getMovieActors(id) {
+  const [actorList, setActorList] = useState([]);
+  const fetchedDetails = useFetchMovieDetails(id);
+  useEffect(() => {
+    if (id && fetchedDetails) {
+      const actors = fetchedDetails.map((element) => [element.name]);
+      actors.splice(5);
+      setActorList(actors);
+    }
+  }, [id, fetchedDetails]);
+  return actorList;
+}
+
 function scoreToStars(score) {
   const star = "\u{2B50}";
   const halfScore = parseFloat(score / 2).toFixed(1);
@@ -102,7 +115,7 @@ function MoviesProvider({ children }) {
         language,
         setLanguage,
         scoreToStars,
-        useFetchMovieDetails,
+        getMovieActors,
       }}
     >
       {children}
