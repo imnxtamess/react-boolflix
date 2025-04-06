@@ -2,21 +2,11 @@ import { useMoviesContext } from "../contexts/GlobalContext";
 import ReactCountryFlag from "react-country-flag";
 import { useState } from "react";
 export default function Home() {
-  const { moviesPlusTv, searchText, popTv, popMovies } = useMoviesContext();
+  const { moviesAndShows, searchText, popTv, popMovies, scoreToStars } =
+    useMoviesContext();
   console.log(popMovies);
   popMovies.splice(15, 5);
   popTv.splice(15, 5);
-  function scoreToStars(score) {
-    const star = "\u{2B50}";
-    const halfScore = parseFloat(score / 2).toFixed(1);
-    let starArr = [];
-    for (let index = 0; index <= halfScore; index++) {
-      starArr.push(star);
-    }
-
-    starArr.join("");
-    return starArr;
-  }
 
   return (
     <>
@@ -87,7 +77,7 @@ export default function Home() {
             <>
               <h1>Results for: {searchText}</h1>
               <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-md-2 row-cols-sm-1 g-4">
-                {moviesPlusTv.map((movie) => (
+                {moviesAndShows.map((movie) => (
                   <div
                     key={movie.id}
                     className="col d-flex justify-content-center"
