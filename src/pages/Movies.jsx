@@ -17,7 +17,8 @@ export default function Movies() {
     <>
       <main>
         <div className="container">
-          <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-3">
+          <h1>Trending Movies Today</h1>
+          <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4">
             {popMovies.map((movie, index) => (
               <div
                 key={`Key is ${movie.title}${movie.id}`}

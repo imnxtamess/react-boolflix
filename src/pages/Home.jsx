@@ -1,12 +1,21 @@
 import { useMoviesContext } from "../contexts/GlobalContext";
 import ReactCountryFlag from "react-country-flag";
+import { useState } from "react";
 export default function Home() {
-  const { moviesAndShows, searchText, popTv, popMovies, scoreToStars } =
-    useMoviesContext();
+  const [dynamicId, setDynamicId] = useState("950387");
+  const {
+    moviesAndShows,
+    searchText,
+    popTv,
+    popMovies,
+    scoreToStars,
+    getMovieActors,
+  } = useMoviesContext();
   console.log(popMovies);
-  popMovies.splice(15, 5);
-  popTv.splice(15, 5);
+  popMovies.splice(15);
+  popTv.splice(15);
 
+  const actors = getMovieActors(dynamicId);
   return (
     <>
       <main>
@@ -24,11 +33,20 @@ export default function Home() {
                     key={`Key is ${movie.title}${movie.id}`}
                     className="col d-flex justify-content-center"
                   >
-                    <div className="movieCard popCard">
+                    <div
+                      className="movieCard popCard"
+                      onMouseOver={() => setDynamicId(movie.id)}
+                    >
                       <div className="hoverCard popCard">
                         <div className="text-white mt-2 p-2 text-start d-flex flex-column gap-2">
                           <strong>Title:</strong> <p>{movie.original_title}</p>
                           <strong>Overview:</strong> <p>{movie.overview}</p>
+                          <div>
+                            <strong>Actors:</strong>
+                            {actors.map((actor) => (
+                              <p>{actor}</p>
+                            ))}
+                          </div>
                         </div>
                       </div>
                       <img
@@ -52,10 +70,17 @@ export default function Home() {
                     key={`Key is ${tvShow.title}${tvShow.id}`}
                     className="col d-flex justify-content-center"
                   >
-                    <div className="movieCard popCard">
+                    <div
+                      className="movieCard popCard"
+                      onMouseOver={() => setDynamicId(movie.id)}
+                    >
                       <div className="hoverCard popCard">
                         <div className="text-white mt-2 p-2 text-start">
-                          <strong>Overview:</strong> {tvShow.overview}
+                          <strong>Title:</strong> <p>{tvShow.original_name}</p>
+                          <strong>Overview:</strong> <p>{tvShow.overview}</p>
+                          {actors.map((actor) => (
+                            <p>{actor}</p>
+                          ))}
                         </div>
                       </div>
                       <img
@@ -81,9 +106,12 @@ export default function Home() {
                     key={movie.id}
                     className="col d-flex justify-content-center"
                   >
-                    <div className="movieCard">
+                    <div
+                      className="movieCard"
+                      onMouseOver={() => setDynamicId(movie.id)}
+                    >
                       <div className="hoverCard">
-                        <ul className="list-unstyled text-white mt-2 p-2 text-start">
+                        <ul className="list-unstyled  mt-2 p-2 text-start">
                           <li>
                             <p>
                               <strong>Titolo:</strong>{" "}
@@ -119,9 +147,14 @@ export default function Home() {
                               />
                             </div>
                           </li>
-                          <li className="mt-2"></li>
-                          <li>
-                            <strong>Overview:</strong> {movie.overview}
+                          <li className="mt-2">
+                            <strong>Actors:</strong>{" "}
+                            {actors.map((actor) => (
+                              <p>{actor}</p>
+                            ))}
+                          </li>
+                          <li className="mt-2">
+                            <strong>Overview:</strong> <p>{movie.overview}</p>
                           </li>
                         </ul>
                       </div>
