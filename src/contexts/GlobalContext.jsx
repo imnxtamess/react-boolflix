@@ -64,7 +64,7 @@ function useFetchPopTv(language) {
   const [popTv, setPopTv] = useState([]);
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=${language}`
+      `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=${language}`
     )
       .then((res) => res.json())
       .then((data) => {

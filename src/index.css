@@ -108,6 +108,7 @@ main {
       @media only screen and (min-width: 1400px) {
         width: 306px;
       }
+
       position: absolute;
       transform: translateX(-50%), translateY(-50%);
       border-radius: 5px;
@@ -123,6 +124,9 @@ main {
       /* width */
       &::-webkit-scrollbar {
         width: 0px;
+      }
+      p {
+        color: var(--netflix-light-accent);
       }
     }
     .cardImg {

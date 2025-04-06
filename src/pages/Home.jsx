@@ -4,7 +4,8 @@ import { useState } from "react";
 export default function Home() {
   const { moviesPlusTv, searchText, popTv, popMovies } = useMoviesContext();
   console.log(popMovies);
-  popMovies.splice(10, 10);
+  popMovies.splice(15, 5);
+  popTv.splice(15, 5);
   function scoreToStars(score) {
     const star = "\u{2B50}";
     const halfScore = parseFloat(score / 2).toFixed(1);
@@ -24,38 +25,69 @@ export default function Home() {
           {searchText === "" ? (
             <h1 className="categoryTitle">Trending Movies Today</h1>
           ) : null}
-          <div
-            className={`row ${
-              searchText === ""
-                ? "row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4"
-                : "row-cols-xxl-4 row-cols-xl-3 row-cols-md-2 row-cols-sm-1 g-4"
-            }  `}
-          >
-            {searchText === ""
-              ? popMovies.map((movie) => (
+
+          {searchText === "" ? (
+            <>
+              <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4">
+                {/* Map Function */}
+                {popMovies.map((movie) => (
                   <div
                     key={`Key is ${movie.title}${movie.id}`}
                     className="col d-flex justify-content-center"
                   >
                     <div className="movieCard popCard">
                       <div className="hoverCard popCard">
-                        <div className=" text-white mt-2 p-2 text-start">
-                          <strong>Overview:</strong> {movie.overview}
+                        <div className="text-white mt-2 p-2 text-start d-flex flex-column gap-2">
+                          <strong>Title:</strong> <p>{movie.original_title}</p>
+                          <strong>Overview:</strong> <p>{movie.overview}</p>
                         </div>
                       </div>
                       <img
                         className="cardImg"
                         src={
                           movie.poster_path
-                            ? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+                            ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
                             : `https://www.svgrepo.com/show/508699/landscape-placeholder.svg`
                         }
                         alt={movie.title}
                       />
                     </div>
                   </div>
-                ))
-              : moviesPlusTv.map((movie) => (
+                ))}
+              </div>
+
+              <h1 className="categoryTitle mt-4">Trending Tv Shows Today</h1>
+              <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4">
+                {popTv.map((tvShow) => (
+                  <div
+                    key={`Key is ${tvShow.title}${tvShow.id}`}
+                    className="col d-flex justify-content-center"
+                  >
+                    <div className="movieCard popCard">
+                      <div className="hoverCard popCard">
+                        <div className="text-white mt-2 p-2 text-start">
+                          <strong>Overview:</strong> {tvShow.overview}
+                        </div>
+                      </div>
+                      <img
+                        className="cardImg"
+                        src={
+                          tvShow.poster_path
+                            ? `https://image.tmdb.org/t/p/w342${tvShow.poster_path}`
+                            : `https://www.svgrepo.com/show/508699/landscape-placeholder.svg`
+                        }
+                        alt={tvShow.title}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h1>Results for: {searchText}</h1>
+              <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-md-2 row-cols-sm-1 g-4">
+                {moviesPlusTv.map((movie) => (
                   <div
                     key={movie.id}
                     className="col d-flex justify-content-center"
@@ -116,7 +148,9 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </main>
     </>
