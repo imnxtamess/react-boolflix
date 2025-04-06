@@ -57,6 +57,21 @@ function useFetchPopTv(language) {
   return popTv;
 }
 
+function useFetchMovieDetails(id) {
+  const [movieCast, setMovieCast] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${api_key}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovieCast(data.cast);
+      })
+      .catch((err) => {
+        console.log("ERROR");
+      });
+  }, [id]);
+  return movieCast;
+}
+
 function scoreToStars(score) {
   const star = "\u{2B50}";
   const halfScore = parseFloat(score / 2).toFixed(1);
@@ -74,8 +89,8 @@ function MoviesProvider({ children }) {
   const [language, setLanguage] = useState("en-EN");
   const moviesAndShows = useFetchMoviesAndShows(searchText, language);
   const popMovies = useFetchPopMovies(language);
-
   const popTv = useFetchPopTv(language);
+
   return (
     <MoviesContext.Provider
       value={{
@@ -87,6 +102,7 @@ function MoviesProvider({ children }) {
         language,
         setLanguage,
         scoreToStars,
+        useFetchMovieDetails,
       }}
     >
       {children}

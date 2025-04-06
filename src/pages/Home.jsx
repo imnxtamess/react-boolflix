@@ -1,6 +1,5 @@
 import { useMoviesContext } from "../contexts/GlobalContext";
 import ReactCountryFlag from "react-country-flag";
-import { useState } from "react";
 export default function Home() {
   const { moviesAndShows, searchText, popTv, popMovies, scoreToStars } =
     useMoviesContext();
@@ -11,7 +10,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className="container-xl">
+        <div className="container">
           {searchText === "" ? (
             <h1 className="categoryTitle">Trending Movies Today</h1>
           ) : null}
