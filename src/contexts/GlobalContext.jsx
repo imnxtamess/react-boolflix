@@ -57,7 +57,7 @@ function useFetchPopTv(language) {
   return popTv;
 }
 
-function useFetchMovieDetails(id) {
+function useFetchMovieCredits(id) {
   const [movieCast, setMovieCast] = useState([]);
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${api_key}`)
@@ -72,16 +72,44 @@ function useFetchMovieDetails(id) {
   return movieCast;
 }
 
+function useFetchTvShowCredits(id) {
+  const [tvShowCast, setTvShowCast] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${api_key}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTvShowCast(data.cast);
+      })
+      .catch((err) => {
+        console.log("ERROR");
+      });
+  }, [id]);
+  return tvShowCast;
+}
+
 function getMovieActors(id) {
   const [actorList, setActorList] = useState([]);
-  const fetchedDetails = useFetchMovieDetails(id);
+  const fetchedMovieDetails = useFetchMovieCredits(id);
   useEffect(() => {
-    if (id && fetchedDetails) {
-      const actors = fetchedDetails.map((element) => [element.name]);
+    if (id && fetchedMovieDetails) {
+      const actors = fetchedMovieDetails.map((element) => [element.name]);
       actors.splice(5);
       setActorList(actors);
     }
-  }, [id, fetchedDetails]);
+  }, [id, fetchedMovieDetails]);
+  return actorList;
+}
+
+function getTvShowActors(id) {
+  const [actorList, setActorList] = useState([]);
+  const fetchedTvShowDetails = useFetchTvShowCredits(id);
+  useEffect(() => {
+    if (id && fetchedTvShowDetails) {
+      const actors = fetchedTvShowDetails.map((element) => [element.name]);
+      actors.splice(5);
+      setActorList(actors);
+    }
+  }, [id, fetchedTvShowDetails]);
   return actorList;
 }
 
@@ -116,6 +144,7 @@ function MoviesProvider({ children }) {
         setLanguage,
         scoreToStars,
         getMovieActors,
+        getTvShowActors,
       }}
     >
       {children}

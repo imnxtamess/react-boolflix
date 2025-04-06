@@ -2,7 +2,8 @@ import { useMoviesContext } from "../contexts/GlobalContext";
 import ReactCountryFlag from "react-country-flag";
 import { useState } from "react";
 export default function Home() {
-  const [dynamicId, setDynamicId] = useState("950387");
+  const [dynamicMovieId, setDynamicMovieId] = useState("950387");
+  const [dynamicTvShowId, setDynamicTvShowId] = useState("276880");
   const {
     moviesAndShows,
     searchText,
@@ -10,18 +11,21 @@ export default function Home() {
     popMovies,
     scoreToStars,
     getMovieActors,
+    getTvShowActors,
   } = useMoviesContext();
-  console.log(popMovies);
+
   popMovies.splice(15);
   popTv.splice(15);
 
-  const actors = getMovieActors(dynamicId);
+  const movieActors = getMovieActors(dynamicMovieId);
+  const tvShowActors = getTvShowActors(dynamicTvShowId);
+  console.log(dynamicTvShowId);
   return (
     <>
       <main>
         <div className="container">
           {searchText === "" ? (
-            <h1 className="categoryTitle">Trending Movies Today</h1>
+            <h1 className="categoryTitle">Trending Movies Right Now</h1>
           ) : null}
 
           {searchText === "" ? (
@@ -35,18 +39,18 @@ export default function Home() {
                   >
                     <div
                       className="movieCard popCard"
-                      onMouseOver={() => setDynamicId(movie.id)}
+                      onMouseOver={() => setDynamicMovieId(movie.id)}
                     >
                       <div className="hoverCard popCard">
                         <div className="text-white mt-2 p-2 text-start d-flex flex-column gap-2">
                           <strong>Title:</strong> <p>{movie.original_title}</p>
-                          <strong>Overview:</strong> <p>{movie.overview}</p>
                           <div>
                             <strong>Actors:</strong>
-                            {actors.map((actor) => (
-                              <p>{actor}</p>
+                            {movieActors.map((actor, index) => (
+                              <p key={index}>{actor}</p>
                             ))}
                           </div>
+                          <strong>Overview:</strong> <p>{movie.overview}</p>
                         </div>
                       </div>
                       <img
@@ -63,7 +67,9 @@ export default function Home() {
                 ))}
               </div>
 
-              <h1 className="categoryTitle mt-4">Trending Tv Shows Today</h1>
+              <h1 className="categoryTitle mt-4">
+                Trending Tv Shows Right Now
+              </h1>
               <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4">
                 {popTv.map((tvShow) => (
                   <div
@@ -72,16 +78,17 @@ export default function Home() {
                   >
                     <div
                       className="movieCard popCard"
-                      onMouseOver={() => setDynamicId(movie.id)}
+                      onMouseOver={() => setDynamicTvShowId(tvShow.id)}
                     >
                       <div className="hoverCard popCard">
                         <div className="text-white mt-2 p-2 text-start">
                           <strong>Title:</strong> <p>{tvShow.original_name}</p>
-                          <strong>Overview:</strong> <p>{tvShow.overview}</p>
-                          {actors.map((actor) => (
-                            <p>{actor}</p>
+                          <strong>Actors:</strong>
+                          {tvShowActors.map((actor, index) => (
+                            <p key={index}>{actor}</p>
                           ))}
                         </div>
+                        <strong>Overview:</strong> <p>{tvShow.overview}</p>
                       </div>
                       <img
                         className="cardImg"
@@ -108,7 +115,7 @@ export default function Home() {
                   >
                     <div
                       className="movieCard"
-                      onMouseOver={() => setDynamicId(movie.id)}
+                      onMouseOver={() => setDynamicMovieId(movie.id)}
                     >
                       <div className="hoverCard">
                         <ul className="list-unstyled  mt-2 p-2 text-start">
@@ -149,7 +156,7 @@ export default function Home() {
                           </li>
                           <li className="mt-2">
                             <strong>Actors:</strong>{" "}
-                            {actors.map((actor) => (
+                            {movieActors.map((actor) => (
                               <p>{actor}</p>
                             ))}
                           </li>

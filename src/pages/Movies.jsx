@@ -1,6 +1,6 @@
 import { useMoviesContext } from "../contexts/GlobalContext";
-import ReactCountryFlag from "react-country-flag";
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 export default function Movies() {
   const [dynamicId, setDynamicId] = useState("950387");
   const {
@@ -31,11 +31,11 @@ export default function Movies() {
                   <div className="hoverCard popCard">
                     <div className="text-white mt-2 p-2 text-start d-flex flex-column gap-2">
                       <strong>Title:</strong> <p>{movie.original_title}</p>
-                      <strong>Overview:</strong> <p>{movie.overview}</p>
                       <strong>Actors:</strong>
                       {actors.map((actor, index) => (
                         <p key={index}>{actor}</p>
                       ))}
+                      <strong>Overview:</strong> <p>{movie.overview}</p>
                     </div>
                   </div>
                   <img
