@@ -7,32 +7,28 @@ export default function Home() {
   const {
     moviesAndShows,
     searchText,
-    popTv,
-    popMovies,
+    popTvShort,
+    popMoviesShort,
     scoreToStars,
     getMovieActors,
     getTvShowActors,
   } = useMoviesContext();
 
-  popMovies.splice(15);
-  popTv.splice(15);
-
   const movieActors = getMovieActors(dynamicMovieId);
   const tvShowActors = getTvShowActors(dynamicTvShowId);
-  console.log(dynamicTvShowId);
+  console.log(dynamicTvShowId, dynamicMovieId);
   return (
     <>
       <main>
         <div className="container">
           {searchText === "" ? (
-            <h1 className="categoryTitle">Trending Movies Right Now</h1>
+            <h1 className="categoryTitle my-3">Popoular Movies Right Now</h1>
           ) : null}
 
           {searchText === "" ? (
             <>
               <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4">
-                {/* Map Function */}
-                {popMovies.map((movie) => (
+                {popMoviesShort.map((movie) => (
                   <div
                     key={`Key is ${movie.title}${movie.id}`}
                     className="col d-flex justify-content-center"
@@ -67,11 +63,11 @@ export default function Home() {
                 ))}
               </div>
 
-              <h1 className="categoryTitle mt-4">
-                Trending Tv Shows Right Now
+              <h1 className="categoryTitle my-3">
+                Popoular Tv Shows Right Now
               </h1>
               <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-md-4 row-cols-sm-3 g-4">
-                {popTv.map((tvShow) => (
+                {popTvShort.map((tvShow) => (
                   <div
                     key={`Key is ${tvShow.title}${tvShow.id}`}
                     className="col d-flex justify-content-center"
@@ -87,8 +83,8 @@ export default function Home() {
                           {tvShowActors.map((actor, index) => (
                             <p key={index}>{actor}</p>
                           ))}
+                          <strong>Overview:</strong> <p>{tvShow.overview}</p>
                         </div>
-                        <strong>Overview:</strong> <p>{tvShow.overview}</p>
                       </div>
                       <img
                         className="cardImg"

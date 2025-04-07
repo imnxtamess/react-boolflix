@@ -37,7 +37,44 @@ function useFetchPopMovies(language) {
         console.log("ERROR", err);
       });
   }, [language]);
-  return popMovie;
+  const popMovieShort = popMovie.slice(0, 10);
+  return popMovieShort;
+}
+
+function useFetchTopMovies(language) {
+  const [topMovie, setTopMovie] = useState([]);
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}&language=${language}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setTopMovie(data.results);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }, [language]);
+  const topMoviesShort = topMovie.slice(0, 10);
+  return topMoviesShort;
+}
+
+function useFetchUpcomingMovies(language) {
+  const [upcomingMovie, setUpcomingMovie] = useState([]);
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&language=${language}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setUpcomingMovie(data.results);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }, [language]);
+  const upcomingMoviesShort = upcomingMovie.slice(6, 16);
+  return upcomingMoviesShort;
 }
 
 function useFetchPopTv(language) {
@@ -54,7 +91,43 @@ function useFetchPopTv(language) {
         console.log("ERROR", err);
       });
   }, [language]);
-  return popTv;
+  const popTvShort = popTv.slice(0, 10);
+  return popTvShort;
+}
+
+function useFetchTopTv(language) {
+  const [topTv, setTopTv] = useState([]);
+  useEffect(() => {
+    fetch(`
+https://api.themoviedb.org/3/tv/top_rated?api_key=${api_key}&language=${language}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTopTv(data.results);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }, [language]);
+  const topTvShort = topTv.slice(0, 10);
+  return topTvShort;
+}
+
+function useFetchUpcomingTv(language) {
+  const [upcomingTv, setUpcomingTv] = useState([]);
+  useEffect(() => {
+    fetch(`
+
+https://api.themoviedb.org/3/tv/airing_today?api_key=${api_key}&language=${language}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUpcomingTv(data.results);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }, [language]);
+  const upcomingTvShort = upcomingTv.slice(0, 10);
+  return upcomingTvShort;
 }
 
 function useFetchMovieCredits(id) {
@@ -129,15 +202,23 @@ function MoviesProvider({ children }) {
   const [searchText, setSearchText] = useState("");
   const [language, setLanguage] = useState("en-EN");
   const moviesAndShows = useFetchMoviesAndShows(searchText, language);
-  const popMovies = useFetchPopMovies(language);
-  const popTv = useFetchPopTv(language);
+  const popMoviesShort = useFetchPopMovies(language);
+  const popTvShort = useFetchPopTv(language);
+  const topMoviesShort = useFetchTopMovies(language);
+  const upcomingMoviesShort = useFetchUpcomingMovies(language);
+  const topTvShort = useFetchTopTv(language);
+  const upcomingTvShort = useFetchUpcomingTv(language);
 
   return (
     <MoviesContext.Provider
       value={{
         moviesAndShows,
-        popMovies,
-        popTv,
+        popMoviesShort,
+        topMoviesShort,
+        upcomingMoviesShort,
+        popTvShort,
+        topTvShort,
+        upcomingTvShort,
         searchText,
         setSearchText,
         language,
