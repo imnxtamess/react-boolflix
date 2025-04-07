@@ -5,7 +5,6 @@
 
 <h1>Implementations Left:</h1>
 
-- Display genres in the hovered cards !!
 - Create filters by genre !
 
 <h1>Final touch ups:</h1>

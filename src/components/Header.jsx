@@ -1,4 +1,5 @@
 import netflixLogo from "../assets/netflixLogo.svg";
+import netflixicon from "../assets/nficon2023.ico";
 import searchIcon from "../assets/searchIcon.svg";
 import notificationBell from "../assets/notificationBell.svg";
 import caret from "../assets/caret.svg";
@@ -22,9 +23,10 @@ export default function Header() {
     <>
       <header className="py-3">
         <nav className="d-flex align-items-center justify-content-between">
-          <div className="leftnav d-flex gap-5 align-items-center">
+          <div className="leftnav d-flex  align-items-center">
             <div className="logo">
-              <img src={netflixLogo} alt="Netflix Logo" />
+              <img id="xlLogo" src={netflixLogo} alt="Netflix Logo" />
+              <img id="smLogo" src={netflixicon} alt="" />
             </div>
             <ul className="d-flex align-items-center gap-5 list-unstyled m-0">
               <li>
@@ -37,7 +39,7 @@ export default function Header() {
                   Home
                 </NavLink>
               </li>
-              <li>
+              <li className="secondary_page">
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "active" : "inactive"
@@ -47,7 +49,7 @@ export default function Header() {
                   TV Shows
                 </NavLink>
               </li>
-              <li>
+              <li className="secondary_page">
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "active" : "inactive"
@@ -107,7 +109,7 @@ export default function Header() {
                 <img onClick={handleSearchClick} src={searchIcon} alt="" />
               </div>
             )}
-            <img src={notificationBell} alt="Notification Bell" />
+            <img id="bell" src={notificationBell} alt="Notification Bell" />
             <div className="profile">
               <img
                 src="https://occ-0-2968-778.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABSJ157bYJWXoC-Bfwi9cbujgvw71MmxWPEeOV7D13XYW4mMMXi2vVwuuybCESwPyNpv5zl9ATvzXnoaCn1yaWH_hoYGTSnY.png?r=bfe"
