@@ -11,9 +11,13 @@ export default function Movies() {
     getMovieActors,
     topMoviesShort,
     upcomingMoviesShort,
+    getMovieGenres,
   } = useMoviesContext();
 
   const actors = getMovieActors(dynamicId);
+  const genres = getMovieGenres(dynamicId);
+
+  console.log(genres);
 
   return (
     <>
@@ -36,6 +40,10 @@ export default function Movies() {
                       <strong>Actors:</strong>
                       {actors.map((actor, index) => (
                         <p key={index}>{actor}</p>
+                      ))}
+                      <strong>Genres:</strong>
+                      {genres.map((genre, index) => (
+                        <p key={index}>{genre}</p>
                       ))}
                       <strong>Overview:</strong> <p>{movie.overview}</p>
                     </div>

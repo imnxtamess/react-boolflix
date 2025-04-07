@@ -160,6 +160,34 @@ function useFetchTvShowCredits(id) {
   return tvShowCast;
 }
 
+function useFetchMovieGenres(id) {
+  const [movieGenres, setMovieGenres] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovieGenres(data.genres);
+      })
+      .catch((err) => {
+        console.log("ERROR");
+      });
+  }, [id]);
+  return movieGenres;
+}
+
+function getMovieGenres(id) {
+  const [genreList, setGenreList] = useState([]);
+  const fetchedGenresDetails = useFetchMovieGenres(id);
+  useEffect(() => {
+    if (id && fetchedGenresDetails) {
+      const genres = fetchedGenresDetails.map((element) => [element.name]);
+      genres.splice(3);
+      setGenreList(genres);
+    }
+  }, [id, fetchedGenresDetails]);
+  return genreList;
+}
+
 function getMovieActors(id) {
   const [actorList, setActorList] = useState([]);
   const fetchedMovieDetails = useFetchMovieCredits(id);
@@ -171,6 +199,34 @@ function getMovieActors(id) {
     }
   }, [id, fetchedMovieDetails]);
   return actorList;
+}
+
+function useFetchTvGenres(id) {
+  const [tvGenres, setTvGenres] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${api_key}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTvGenres(data.genres);
+      })
+      .catch((err) => {
+        console.log("ERROR");
+      });
+  }, [id]);
+  return tvGenres;
+}
+
+function getTvGenres(id) {
+  const [genreList, setGenreList] = useState([]);
+  const fetchedGenresDetails = useFetchTvGenres(id);
+  useEffect(() => {
+    if (id && fetchedGenresDetails) {
+      const genres = fetchedGenresDetails.map((element) => [element.name]);
+      genres.splice(3);
+      setGenreList(genres);
+    }
+  }, [id, fetchedGenresDetails]);
+  return genreList;
 }
 
 function getTvShowActors(id) {
@@ -226,6 +282,8 @@ function MoviesProvider({ children }) {
         scoreToStars,
         getMovieActors,
         getTvShowActors,
+        getMovieGenres,
+        getTvGenres,
       }}
     >
       {children}

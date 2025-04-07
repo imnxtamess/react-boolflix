@@ -2,7 +2,7 @@ import { useMoviesContext } from "../contexts/GlobalContext";
 
 import { useState } from "react";
 export default function TVShows() {
-  const [dynamicId, setDynamicId] = useState("950387");
+  const [dynamicId, setDynamicId] = useState("276880");
   const {
     moviesAndShows,
     searchText,
@@ -11,9 +11,11 @@ export default function TVShows() {
     popTvShort,
     topTvShort,
     upcomingTvShort,
+    getTvGenres,
   } = useMoviesContext();
 
   const actors = getTvShowActors(dynamicId);
+  const genres = getTvGenres(dynamicId);
 
   return (
     <>
@@ -36,6 +38,10 @@ export default function TVShows() {
                       <strong>Actors:</strong>
                       {actors.map((actor, index) => (
                         <p key={index}>{actor}</p>
+                      ))}
+                      <strong>Genres:</strong>
+                      {genres.map((genre, index) => (
+                        <p key={index}>{genre}</p>
                       ))}
                       <strong>Overview:</strong> <p>{movie.overview}</p>
                     </div>
